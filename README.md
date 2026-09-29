@@ -187,22 +187,6 @@ It uses **no build step and no JavaScript framework dependencies**.
 
 The page opens with a handwritten **hello**, then reveals the editorial portfolio.
 
-### Run Locally
-
-Open `index.html` directly in your browser.
-
-Or run a local server from this folder:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then open:
-
-```text
-http://localhost:8000
-```
-
 ---
 
 ## Author
