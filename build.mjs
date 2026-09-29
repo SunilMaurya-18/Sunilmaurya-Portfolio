@@ -1,4 +1,5 @@
 import esbuild from "esbuild";
+import { cpSync, existsSync, rmSync } from "node:fs";
 
 await esbuild.build({
   entryPoints: ["src/mount.tsx"],
@@ -24,3 +25,9 @@ await esbuild.build({
     },
   ],
 });
+
+const outDir = "dist";
+rmSync(outDir, { recursive: true, force: true });
+for (const path of ["index.html", "css", "js", "fonts", "src/shaders/threeui.css"]) {
+  if (existsSync(path)) cpSync(path, `${outDir}/${path}`, { recursive: true });
+}
