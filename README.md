@@ -138,7 +138,7 @@ I am continuously expanding my knowledge in:
 
 ## Selected work
 
-- [MedIntel](https://github.com/SunilMaurya-18/MedIntel)
+- [Forged Media Detection](https://github.com/SunilMaurya-18/Forged-Obscene-Media-Detection-Engine)
 - [SEOPulse](https://github.com/SunilMaurya-18/SEOPULSE)
 - [DevTasks](https://github.com/SunilMaurya-18/DevTasks)
 - [RedisLab](https://github.com/SunilMaurya-18/redis-lab)
@@ -185,7 +185,21 @@ The website is built using:
 
 It uses **no build step and no JavaScript framework dependencies**.
 
-The page opens with a handwritten **hello**, then reveals the editorial portfolio.
+The page is a black-and-white, scroll-driven story: a loader, a typewriter hero, a pinned system diagram that grows as you scroll, a morphing particle scene for the work process, case studies, and an optional generated soundtrack that follows the page.
+
+### Structure
+
+```text
+index.html       markup and content
+css/styles.css   all styles
+js/main.js       animations, scroll scenes, cursor, and sound
+```
+
+To play a licensed music track instead of the generated score, add the file as `audio/bg.mp3` and set `data-track="audio/bg.mp3"` on the Sound button in `index.html`.
+
+### Deploy
+
+It is a static site. On Vercel, use the "Other" framework preset with no build command and the project root as the output directory.
 
 ---
 

@@ -1,565 +1,461 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Sunil Maurya — Java Backend Developer</title>
+  <title>Sunil Maurya | Java Backend Developer</title>
   <meta name="description" content="Sunil Maurya, a Java backend developer building reliable systems, secure REST APIs, and AI-assisted applications with Spring Boot.">
-  <meta name="theme-color" content="#0a0a0a">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111111'/%3E%3Crect x='22' y='22' width='10' height='10' fill='%23e10600'/%3E%3Ctext x='14' y='21' text-anchor='middle' font-family='sans-serif' font-size='16' fill='%23ffffff'%3ES%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='15' fill='%23fff'%3ESM%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="src/shaders/threeui.css">
   <script>
     (function () {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        document.documentElement.classList.add("reduce", "ready");
-      } else {
-        document.documentElement.classList.add("is-intro");
-      }
+      var root = document.documentElement;
+      root.classList.add("js");
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) root.classList.add("reduce", "ready");
+      else root.classList.add("is-loading");
     })();
   </script>
 </head>
 <body>
-  <div class="intro" id="intro" role="dialog" aria-label="Introduction">
-    <p class="sr">hello</p>
-    <svg class="hello" viewBox="0 0 280 130" role="img" aria-label="hello">
-      <title>hello</title>
-      <path pathLength="1" d="M20 98 C22 70 28 34 38 16 C44 6 52 12 48 30 C44 52 34 82 30 98 C32 84 44 62 58 62 C70 62 66 84 64 96 C64 100 70 100 80 90 C88 80 100 66 96 62 C90 58 78 72 80 88 C82 102 98 100 108 88 C116 76 126 40 132 18 C136 6 146 10 140 34 C134 58 126 88 130 96 C132 102 142 98 150 88 C158 76 168 40 174 18 C178 6 188 10 182 34 C176 58 168 88 172 96 C174 102 184 98 192 88 C198 80 206 64 218 64 C232 64 230 98 212 98 C198 98 200 74 216 66 C226 62 236 68 248 60" />
-    </svg>
-    <button class="skip-intro" id="skipIntro" type="button">Skip</button>
+  <a href="#hero" class="skip">Skip to content</a>
+
+  <div class="loader" id="loader" role="status" aria-live="polite">
+    <div class="loader-inner">
+      <p class="kicker">Initializing</p>
+      <div class="loader-line"><span>Requirements</span><span data-scramble="OK">------</span></div>
+      <div class="loader-line"><span>API design</span><span data-scramble="OK">------</span></div>
+      <div class="loader-line"><span>Persistence</span><span data-scramble="OK">------</span></div>
+      <div class="loader-line"><span>Security</span><span data-scramble="OK">------</span></div>
+      <div class="loader-line"><span>Deployment</span><span data-scramble="READY">------</span></div>
+    </div>
   </div>
 
-  <a class="skip" href="#top">Skip to content</a>
+  <div class="progress-bar" id="progress" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-core"></span><span class="cursor-ghost"></span></div>
+  <div class="glyph-glitch" id="glyphGlitch" hidden aria-hidden="true"><span class="glyph-glitch-a"></span><span class="glyph-glitch-b"></span></div>
 
-  <div class="world" id="world" aria-hidden="true">
-    <div id="shaderFrame"></div>
+  <button type="button" class="sound-toggle" id="soundToggle" aria-pressed="false" aria-label="Turn sound on">
+    <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="sound-label">Sound off</span>
+  </button>
+
+  <div class="scene-counter" aria-hidden="true">
+    <span class="scene-counter-label">Scene</span>
+    <span class="scene-counter-num" id="sceneNum">01</span>
   </div>
 
-  <div id="navDock" class="nav-dock"></div>
+  <header class="nav">
+    <a href="#hero" class="nav-brand" aria-label="Sunil Maurya, home">
+      <span>Sunil</span><span>Maurya</span>
+    </a>
+    <a href="mailto:sunilmaurya7786@gmail.com" class="nav-email copy-email" data-email="sunilmaurya7786@gmail.com" aria-label="Copy sunilmaurya7786@gmail.com to clipboard">
+      <span class="copy-email-inner">
+        <span class="copy-email-default">sunilmaurya7786@gmail.com</span>
+        <span class="copy-email-done" aria-hidden="true">Copied ✓</span>
+      </span>
+      <span class="sr" role="status"></span>
+    </a>
+  </header>
 
-  <main id="site">
-    <section class="hero" id="top">
-      <div class="hero-meta">
-        <span>Sunil Maurya</span>
-        <span>Software engineer · Azamgarh</span>
-      </div>
-      <div class="hero-layout">
-        <h1 aria-label="Java Backend Developer">
-          <span class="mask"><span style="--d:80ms">Java</span></span>
-          <span class="mask"><span style="--d:180ms">Backend</span></span>
-          <span class="mask"><span style="--d:280ms">Developer</span></span>
+  <main>
+    <section id="hero" class="hero" data-scene="01">
+      <canvas class="hero-field" id="heroField" aria-hidden="true"></canvas>
+      <div class="hero-veil" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <h1 class="display display-xl">
+          <span class="clip"><span class="block">Sunil</span></span>
+          <span class="clip"><span class="block" style="--d:90ms">Maurya</span></span>
         </h1>
-        <div class="hero-side">
-          <p class="lede">I build reliable backend systems, secure REST APIs, and data-driven services with Java and Spring Boot.</p>
-          <ul class="focus-list">
-            <li>Spring Boot</li>
-            <li>REST APIs</li>
-            <li>PostgreSQL</li>
-            <li>Redis</li>
-            <li>AI / GenAI</li>
+        <p class="kicker hero-kicker" data-rise>Java backend developer · Azamgarh, India</p>
+        <p class="type-line display display-sm" aria-label="I build REST APIs, backends, secure systems, data layers, AI features">
+          <span class="type-line-sizer" aria-hidden="true">
+            <span>I build REST APIs.</span>
+            <span>I build backends.</span>
+            <span>I build secure systems.</span>
+            <span>I build data layers.</span>
+            <span>I build AI features.</span>
+          </span>
+          <span class="type-line-live" id="typeLine" aria-hidden="true"><span class="caret"></span></span>
+        </p>
+        <p class="hero-lede" data-rise>From the first endpoint to a containerized deploy, and everything that breaks in between.</p>
+        <p class="avail" data-rise><i></i>Available for backend roles</p>
+      </div>
+      <a href="#story" class="hero-scroll kicker">
+        <span>Scroll the story</span>
+        <span class="scroll-icon" aria-hidden="true"><span></span></span>
+      </a>
+    </section>
+
+    <section id="story" class="story" data-scene="02" aria-labelledby="story-heading">
+      <div class="story-pin">
+        <div class="story-copy">
+          <p class="kicker">The journey</p>
+          <h2 id="story-heading" class="sr">How a backend grows: from one endpoint to a full system</h2>
+          <p class="story-value display display-xl" id="storyValue">0</p>
+          <p class="story-unit">components</p>
+          <p class="story-stage" id="storyStage">Endpoint</p>
+          <p class="story-line" id="storyLine">One controller, one response.</p>
+          <p class="story-proof">Every system starts as a single endpoint. Each layer here is one I have built into a published project, or am building now.</p>
+        </div>
+        <div class="story-system">
+          <svg viewBox="0 0 900 500" class="evolve" id="evolve" role="img" aria-label="A backend system diagram that gains layers as you scroll"></svg>
+          <ol class="story-steps" id="storySteps" aria-hidden="true">
+            <li></li><li></li><li></li><li></li><li></li><li></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="craft" class="craft" data-scene="03" aria-labelledby="craft-heading">
+      <div class="craft-sticky">
+        <canvas class="craft-still" id="craftStill" aria-hidden="true"></canvas>
+        <p class="kicker">How the work actually happens</p>
+        <h2 id="craft-heading" class="display display-sm">At the machine.</h2>
+        <div class="terminal" id="terminal" role="status" aria-live="polite"></div>
+      </div>
+      <div class="craft-beats">
+        <article class="craft-beat is-on" data-line="defining the problem before writing a line">
+          <p class="kicker">01</p>
+          <h3 class="display display-md">Think</h3>
+          <p>Understand the problem, the constraints, and what happens when it fails.</p>
+        </article>
+        <article class="craft-beat" data-line="sketching entities, endpoints, and failure modes">
+          <p class="kicker">02</p>
+          <h3 class="display display-md">Design</h3>
+          <p>Shape the system: entities, API contracts, data access, and where to cache.</p>
+        </article>
+        <article class="craft-beat" data-line="mvn spring-boot:run">
+          <p class="kicker">03</p>
+          <h3 class="display display-md">Build</h3>
+          <p>Turn the design into software: Spring Boot services, secured APIs, data layers, and tests.</p>
+        </article>
+        <article class="craft-beat" data-line="mvn test &amp;&amp; docker compose up -d">
+          <p class="kicker">04</p>
+          <h3 class="display display-md">Ship</h3>
+          <p>Production is the real test: green tests, a Docker image, a deploy, and an eye on the logs.</p>
+        </article>
+        <article class="craft-beat" data-line="git commit -m &quot;refactor: make it simpler&quot;">
+          <p class="kicker">05</p>
+          <h3 class="display display-md">Evolve</h3>
+          <p>Software is never finished. The architecture has to grow with the product.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="stack" class="domains" data-scene="04" aria-labelledby="stack-heading">
+      <div class="domains-pin">
+        <div class="domains-copy">
+          <p class="kicker">Stack</p>
+          <h2 id="stack-heading" class="display display-md">Across<br>the stack.</h2>
+          <p class="domains-intro">The tools behind the systems, grouped the way they show up in a real backend.</p>
+        </div>
+        <div class="domains-stage">
+          <div class="domains-frame" id="domainFrame">
+            <div class="domains-grid" aria-hidden="true"></div>
+            <div class="domains-beat" aria-hidden="true"></div>
+            <ul class="domains-tools" id="domainTools"></ul>
+            <p class="domains-tag kicker" id="domainTag"></p>
+          </div>
+        </div>
+        <div class="domains-current">
+          <h3 class="display display-md domains-name"><span id="domainName">Languages</span></h3>
+          <p class="kicker domains-count"><span id="domainIndex">01</span> / <span id="domainTotal">06</span></p>
+        </div>
+      </div>
+      <dl class="sr">
+        <dt>Languages</dt><dd>Java, JavaScript, TypeScript, SQL, C</dd>
+        <dt>Backend</dt><dd>Spring Boot, Spring Security, Spring Data JPA, Hibernate, JWT, Node.js</dd>
+        <dt>Data</dt><dd>PostgreSQL, MongoDB, Redis</dd>
+        <dt>Delivery</dt><dd>Docker, Maven, Git, Nginx, Postman, OpenAPI</dd>
+        <dt>Testing</dt><dd>JUnit, Mockito</dd>
+        <dt>AI</dt><dd>Spring AI, RAG, Embeddings, LLM apps, MCP</dd>
+      </dl>
+    </section>
+
+    <section id="work" class="work" data-scene="05" aria-labelledby="work-heading">
+      <div class="work-inner">
+        <p class="kicker" data-rise>Case studies</p>
+        <h2 id="work-heading" class="display display-md" data-rise>Proof,<br>not promises.</h2>
+
+        <div class="work-list">
+          <article class="work-item">
+            <div class="work-head">
+              <p class="work-index display" aria-hidden="true">01</p>
+              <div class="work-title">
+                <h3 class="work-name display display-md" data-rise>
+                  <a href="https://github.com/SunilMaurya-18/Forged-Obscene-Media-Detection-Engine" target="_blank" rel="noopener noreferrer" class="work-name-link" data-magnetic>
+                    <span>Forged Media Detection</span><span class="work-name-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </h3>
+                <p class="work-tagline" data-rise>Taking harmful media down fast, without ever keeping a copy.</p>
+              </div>
+            </div>
+            <div class="work-media" data-reveal aria-hidden="true">
+              <span class="work-media-word">Detect</span>
+              <div class="flow"><span>Upload</span><i></i><span>PyTorch</span><i></i><span>Spring Boot</span><i></i><span>Review</span></div>
+            </div>
+            <div class="work-detail">
+              <p class="work-overview" data-rise>A trust and safety platform that detects deepfakes and explicit images, routes them for human review, and tracks takedown deadlines. Raw media is never stored.</p>
+              <div class="work-scale" data-rise>
+                <p class="work-label">Built with</p>
+                <ul class="work-scale-list">
+                  <li><span class="work-scale-value display">PyTorch</span><span class="work-scale-label">detection model</span></li>
+                  <li><span class="work-scale-value display">Spring</span><span class="work-scale-label">decision engine</span></li>
+                  <li><span class="work-scale-value display">React</span><span class="work-scale-label">review console</span></li>
+                </ul>
+              </div>
+              <div class="work-cols">
+                <div class="work-block" data-rise>
+                  <p class="work-label">The challenge</p>
+                  <p class="work-text">Harmful media needs a fast, auditable path from detection to takedown, without the platform becoming a store of the very content it removes.</p>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">What I did</p>
+                  <ul class="work-points">
+                    <li>Paired a PyTorch detector with a Spring Boot decision engine.</li>
+                    <li>Routed flagged items into review with takedown deadline tracking.</li>
+                    <li>Produced signed reports while keeping raw media out of storage.</li>
+                  </ul>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">The result</p>
+                  <ul class="work-results"><li>Auditable decisions</li><li>Deadline tracking</li><li>No raw media at rest</li></ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-item">
+            <div class="work-head">
+              <p class="work-index display" aria-hidden="true">02</p>
+              <div class="work-title">
+                <h3 class="work-name display display-md" data-rise>
+                  <a href="https://github.com/SunilMaurya-18/SEOPULSE" target="_blank" rel="noopener noreferrer" class="work-name-link" data-magnetic>
+                    <span>SEOPulse</span><span class="work-name-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </h3>
+                <p class="work-tagline" data-rise>Turning a website crawl into a ranked list of what to fix.</p>
+              </div>
+            </div>
+            <div class="work-media" data-reveal aria-hidden="true">
+              <span class="work-media-word">Crawl</span>
+              <div class="flow"><span>React</span><i></i><span>Spring Boot</span><i></i><span>Redis</span><i></i><span>PostgreSQL</span></div>
+            </div>
+            <div class="work-detail">
+              <p class="work-overview" data-rise>A full-stack website SEO audit platform. Connect a site, run a crawl, review ranked issues, and download a report.</p>
+              <div class="work-scale" data-rise>
+                <p class="work-label">Built with</p>
+                <ul class="work-scale-list">
+                  <li><span class="work-scale-value display">Spring</span><span class="work-scale-label">secured API</span></li>
+                  <li><span class="work-scale-value display">Redis</span><span class="work-scale-label">caching</span></li>
+                  <li><span class="work-scale-value display">JWT</span><span class="work-scale-label">authentication</span></li>
+                </ul>
+              </div>
+              <div class="work-cols">
+                <div class="work-block" data-rise>
+                  <p class="work-label">The challenge</p>
+                  <p class="work-text">An audit is only useful if it is fast to run and clear about priority. Raw crawl data is noise until it becomes a ranked list of issues.</p>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">What I did</p>
+                  <ul class="work-points">
+                    <li>Designed crawl, audit, and report flows across a React client and a secured Spring Boot API.</li>
+                    <li>Used Redis for hot data and PostgreSQL for audit history.</li>
+                  </ul>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">The result</p>
+                  <ul class="work-results"><li>Ranked issues</li><li>Downloadable reports</li><li>JWT-secured API</li></ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-item">
+            <div class="work-head">
+              <p class="work-index display" aria-hidden="true">03</p>
+              <div class="work-title">
+                <h3 class="work-name display display-md" data-rise>
+                  <a href="https://github.com/SunilMaurya-18/DevTasks" target="_blank" rel="noopener noreferrer" class="work-name-link" data-magnetic>
+                    <span>DevTasks</span><span class="work-name-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </h3>
+                <p class="work-tagline" data-rise>A task manager built like a production service.</p>
+              </div>
+            </div>
+            <div class="work-media" data-reveal aria-hidden="true">
+              <span class="work-media-word">Ship</span>
+              <div class="flow"><span>Nginx</span><i></i><span>React</span><i></i><span>Spring Boot</span><i></i><span>MongoDB</span></div>
+            </div>
+            <div class="work-detail">
+              <p class="work-overview" data-rise>A task manager with registration, JWT auth, role-based access, search, filters, and pagination. Packaged with Docker and Nginx.</p>
+              <div class="work-cols">
+                <div class="work-block" data-rise>
+                  <p class="work-label">The challenge</p>
+                  <p class="work-text">Most to-do apps stop at CRUD. The goal was the parts real products need: identity, permissions, and queries that stay fast as data grows.</p>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">What I did</p>
+                  <ul class="work-points">
+                    <li>Implemented authentication, authorization, and task workflows.</li>
+                    <li>Added search, filters, and pagination on MongoDB.</li>
+                    <li>Containerized the stack with Docker behind Nginx.</li>
+                  </ul>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">The result</p>
+                  <ul class="work-results"><li>Role-based access</li><li>Paginated search</li><li>One-command deploy</li></ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-item">
+            <div class="work-head">
+              <p class="work-index display" aria-hidden="true">04</p>
+              <div class="work-title">
+                <h3 class="work-name display display-md" data-rise>
+                  <a href="https://github.com/SunilMaurya-18/redis-lab" target="_blank" rel="noopener noreferrer" class="work-name-link" data-magnetic>
+                    <span>RedisLab</span><span class="work-name-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </h3>
+                <p class="work-tagline" data-rise>Making Redis behavior observable instead of magical.</p>
+              </div>
+            </div>
+            <div class="work-media" data-reveal aria-hidden="true">
+              <span class="work-media-word">Cache</span>
+              <div class="flow"><span>Streams</span><i></i><span>Locks</span><i></i><span>Rate limits</span><i></i><span>Cluster</span></div>
+            </div>
+            <div class="work-detail">
+              <p class="work-overview" data-rise>A Redis internals lab: data structures, streams, locks, rate limits, persistence, and cluster topologies, exercised through Spring Boot.</p>
+              <div class="work-cols">
+                <div class="work-block" data-rise>
+                  <p class="work-label">The challenge</p>
+                  <p class="work-text">Redis is easy to add and hard to reason about. Locks, persistence modes, and clustering only make sense once you watch them fail.</p>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">What I did</p>
+                  <ul class="work-points">
+                    <li>Built experiments for structures, streams, distributed locks, and rate limiting.</li>
+                    <li>Ran persistence and cluster setups in Docker to observe behavior.</li>
+                  </ul>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">The result</p>
+                  <ul class="work-results"><li>Repeatable experiments</li><li>Cluster topologies</li><li>Spring Data Redis patterns</li></ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-item">
+            <div class="work-head">
+              <p class="work-index display" aria-hidden="true">05</p>
+              <div class="work-title">
+                <h3 class="work-name display display-md" data-rise>
+                  <a href="https://prithvicore.vercel.app/" target="_blank" rel="noopener noreferrer" class="work-name-link" data-magnetic>
+                    <span>PrithviCore</span><span class="work-name-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </h3>
+                <p class="work-tagline" data-rise>Putting soil data and plant health in a farmer's hands.</p>
+              </div>
+            </div>
+            <div class="work-media" data-reveal aria-hidden="true">
+              <span class="work-media-word">Grow</span>
+              <div class="flow"><span>Next.js</span><i></i><span>Express</span><i></i><span>OpenAI</span><i></i><span>MongoDB</span></div>
+            </div>
+            <div class="work-detail">
+              <p class="work-overview" data-rise>An AI-assisted farm monitoring platform with soil analytics, plant image review, weather context, and a live web app.</p>
+              <div class="work-cols">
+                <div class="work-block" data-rise>
+                  <p class="work-label">The challenge</p>
+                  <p class="work-text">Farm data is scattered across sensors, weather, and what the farmer sees in the field. It needs to land in one place that is simple to read.</p>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">What I did</p>
+                  <ul class="work-points">
+                    <li>Shipped a live web app with sensor-oriented soil analytics.</li>
+                    <li>Added AI-based plant image review with weather context.</li>
+                  </ul>
+                </div>
+                <div class="work-block" data-rise>
+                  <p class="work-label">The result</p>
+                  <ul class="work-results"><li>Live product</li><li>AI plant review</li><li><a href="https://github.com/SunilMaurya-18/PrithviCore" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a></li></ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="earlier">
+          <p class="kicker" data-rise>Earlier studies</p>
+          <ul class="index-list">
+            <li data-rise><a href="https://github.com/SunilMaurya-18/resend-mail-server" target="_blank" rel="noopener noreferrer">Resend Mail Server</a><p>A minimal Spring Boot service that sends email through Resend.</p><span>Java</span></li>
+            <li data-rise><a href="https://github.com/SunilMaurya-18/SchoolManagement.java" target="_blank" rel="noopener noreferrer">School Management</a><p>A Java OOP console project for teachers, students, and grades.</p><span>Java</span></li>
+            <li data-rise><a href="https://github.com/SunilMaurya-18/vidyavault-library-system" target="_blank" rel="noopener noreferrer">VidyaVault</a><p>A library interface built with HTML, CSS, and JavaScript.</p><span>Web</span></li>
+            <li data-rise><a href="https://github.com/SunilMaurya-18/library-management-system" target="_blank" rel="noopener noreferrer">Library Management</a><p>A C console program for adding, issuing, and returning books.</p><span>C</span></li>
+            <li data-rise><span class="name">PGRKAM AI Career Assistant</span><p>An AI-powered career assistant for career exploration and job-search activities.</p><span>AI</span></li>
           </ul>
         </div>
       </div>
-      <div class="hero-foot">
-        <p class="avail"><i></i>Available for opportunity</p>
-        <div class="hero-actions">
-          <a class="btn" href="#contact">Contact</a>
-          <a class="scrollhint" href="#about">Scroll <span></span></a>
-        </div>
-      </div>
     </section>
 
-    <section class="about" id="about">
-      <p class="kicker reveal">About</p>
-      <h2 class="about-title">
-        <span class="mask"><span style="--d:0ms">A backend</span></span>
-        <span class="mask"><span style="--d:70ms">developer</span></span>
-        <span class="mask"><span style="--d:140ms">building</span></span>
-        <span class="mask"><span style="--d:210ms">practical</span></span>
-        <span class="mask"><span style="--d:280ms">systems.</span></span>
+    <section id="now" class="now" data-scene="06" aria-labelledby="now-heading">
+      <p class="kicker" data-rise>Right now</p>
+      <h2 id="now-heading" class="display display-md" data-rise>Sometimes I<br>break things<br>on purpose.</h2>
+      <p class="now-lede" data-rise>Labs, experiments, and LeetCode. A different playground for the same backend mindset.</p>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track display">
+          <span>Spring AI</span><span>RAG</span><span>Embeddings</span><span>MCP</span><span>System design</span><span>Redis internals</span><span>LLM apps</span>
+          <span>Spring AI</span><span>RAG</span><span>Embeddings</span><span>MCP</span><span>System design</span><span>Redis internals</span><span>LLM apps</span>
+        </div>
+      </div>
+      <p class="sr">Currently exploring: Spring AI, RAG, embeddings, MCP, system design, Redis internals, and LLM apps.</p>
+    </section>
+
+    <section id="contact" class="contact" data-scene="07" aria-labelledby="contact-heading">
+      <p class="kicker" data-rise>Contact</p>
+      <h2 id="contact-heading" class="display display-xl contact-title">
+        <span class="clip"><span class="block">What should</span></span>
+        <span class="clip"><span class="block" style="--d:90ms">we build</span></span>
+        <span class="clip"><span class="block" style="--d:180ms">next?</span></span>
       </h2>
-      <div class="about-grid">
-        <div class="prose reveal">
-          <p>I'm Sunil Maurya, a Java backend developer focused on practical systems with Java and Spring Boot.</p>
-          <p>I design REST APIs, work with databases, and explore Redis, security, and how AI can sit inside a real backend. I learn by building, testing, and improving the thing until I understand why it works.</p>
-        </div>
-        <dl class="facts reveal">
-          <div>
-            <dt>Location</dt>
-            <dd>Azamgarh, Uttar Pradesh, India</dd>
-          </div>
-          <div>
-            <dt>Role</dt>
-            <dd>Java Developer / Software Engineer</dd>
-          </div>
-          <div>
-            <dt>Focus</dt>
-            <dd>Spring Boot, REST APIs, data</dd>
-          </div>
-          <div>
-            <dt>Now</dt>
-            <dd>Spring AI, RAG, system design</dd>
-          </div>
-        </dl>
-      </div>
-    </section>
-
-    <section class="statement" aria-label="Statement">
-      <div class="stage" id="stage" aria-hidden="true">
-        <div class="orbit-wrap" id="orbit">
-          <div class="prism-shadow"></div>
-          <div class="halo"></div>
-          <div class="halo halo-b"></div>
-          <div class="prism">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <span class="chip chip-a">Java</span>
-          <span class="chip chip-b">Spring</span>
-          <span class="chip chip-c">Redis</span>
-          <span class="chip chip-d">APIs</span>
-        </div>
-      </div>
-      <p class="kicker reveal">Direction</p>
-      <h2 class="poster">
-        <span class="mask"><span style="--d:0ms">Building</span></span>
-        <span class="mask"><span style="--d:90ms">systems</span></span>
-        <span class="mask"><span style="--d:180ms">that scale.</span></span>
-      </h2>
-    </section>
-
-    <section class="stack" id="skills">
-      <p class="kicker reveal">Stack</p>
-      <h2 class="section-title reveal">The ecosystem I work in.</h2>
-      <p class="section-note reveal">A catalog of what I use. No percentages — just the tools behind the systems.</p>
-      <div class="eco reveal">
-        <h3 class="eco-label">Languages</h3>
-        <p class="eco-item">Java</p>
-        <p class="eco-item">JavaScript</p>
-        <p class="eco-item">TypeScript</p>
-        <p class="eco-item">SQL</p>
-        <p class="eco-item">HTML</p>
-        <p class="eco-item">CSS</p>
-        <p class="eco-item">C</p>
-        <p class="eco-item" aria-hidden="true"></p>
-
-        <h3 class="eco-label">Backend</h3>
-        <p class="eco-item">Spring Boot</p>
-        <p class="eco-item">Spring Security</p>
-        <p class="eco-item">Spring Data JPA</p>
-        <p class="eco-item">Hibernate</p>
-        <p class="eco-item">REST APIs</p>
-        <p class="eco-item">JWT</p>
-        <p class="eco-item">Node.js</p>
-        <p class="eco-item" aria-hidden="true"></p>
-
-        <h3 class="eco-label">Data</h3>
-        <p class="eco-item">PostgreSQL</p>
-        <p class="eco-item">MongoDB</p>
-        <p class="eco-item">Redis</p>
-        <p class="eco-item">JPA / Hibernate</p>
-
-        <h3 class="eco-label">Quality</h3>
-        <p class="eco-item">JUnit</p>
-        <p class="eco-item">Mockito</p>
-        <p class="eco-item">Postman</p>
-        <p class="eco-item">Swagger / OpenAPI</p>
-
-        <h3 class="eco-label">Delivery</h3>
-        <p class="eco-item">Docker</p>
-        <p class="eco-item">Docker Compose</p>
-        <p class="eco-item">Maven</p>
-        <p class="eco-item">Git</p>
-        <p class="eco-item">GitHub</p>
-        <p class="eco-item">IntelliJ IDEA</p>
-        <p class="eco-item" aria-hidden="true"></p>
-        <p class="eco-item" aria-hidden="true"></p>
-
-        <h3 class="eco-label">Practice</h3>
-        <p class="eco-item">Validation</p>
-        <p class="eco-item">Exception handling</p>
-        <p class="eco-item">Logging</p>
-        <p class="eco-item">Pagination</p>
-        <p class="eco-item">MapStruct</p>
-        <p class="eco-item">Environment variables</p>
-        <p class="eco-item" aria-hidden="true"></p>
-        <p class="eco-item" aria-hidden="true"></p>
-
-        <h3 class="eco-label">Exploring</h3>
-        <p class="eco-item">Spring AI</p>
-        <p class="eco-item">Generative AI</p>
-        <p class="eco-item">RAG</p>
-        <p class="eco-item">Embeddings</p>
-        <p class="eco-item">LLM applications</p>
-        <p class="eco-item">Prompt engineering</p>
-        <p class="eco-item">AI agent concepts</p>
-        <p class="eco-item">MCP</p>
-        <p class="eco-item">System design</p>
-        <p class="eco-item" aria-hidden="true"></p>
-        <p class="eco-item" aria-hidden="true"></p>
-        <p class="eco-item" aria-hidden="true"></p>
-      </div>
-
-      <div class="caps">
-        <p class="kicker reveal">Capabilities</p>
-        <h2 class="section-title reveal">How the work is organized.</h2>
-        <div class="cap-grid">
-          <article class="cap reveal">
-            <span class="cap-no">01</span>
-            <h3>Backend Development</h3>
-            <p>Java and Spring Boot services with clear boundaries, validation, and persistence.</p>
-            <ul class="tags"><li>Java</li><li>Spring Boot</li><li>JPA</li></ul>
-          </article>
-          <article class="cap reveal">
-            <span class="cap-no">02</span>
-            <h3>API Engineering</h3>
-            <p>REST interfaces with pagination, error handling, and OpenAPI documentation.</p>
-            <ul class="tags"><li>REST</li><li>Validation</li><li>OpenAPI</li></ul>
-          </article>
-          <article class="cap reveal">
-            <span class="cap-no">03</span>
-            <h3>Database Engineering</h3>
-            <p>Relational and document data, plus Redis when the access pattern needs it.</p>
-            <ul class="tags"><li>PostgreSQL</li><li>MongoDB</li><li>Redis</li></ul>
-          </article>
-          <article class="cap reveal">
-            <span class="cap-no">04</span>
-            <h3>Security</h3>
-            <p>Spring Security and JWT for protected APIs and authenticated clients.</p>
-            <ul class="tags"><li>Spring Security</li><li>JWT</li></ul>
-          </article>
-          <article class="cap reveal">
-            <span class="cap-no">05</span>
-            <h3>AI / GenAI</h3>
-            <p>Exploring Spring AI, RAG, embeddings, and how models fit inside a backend.</p>
-            <ul class="tags"><li>Spring AI</li><li>RAG</li><li>LLM APIs</li></ul>
-          </article>
-          <article class="cap reveal">
-            <span class="cap-no">06</span>
-            <h3>DevOps</h3>
-            <p>Docker, Compose, Maven, and Git as the path from a laptop to a running system.</p>
-            <ul class="tags"><li>Docker</li><li>Maven</li><li>Git</li></ul>
-          </article>
-          <article class="cap reveal">
-            <span class="cap-no">07</span>
-            <h3>Testing</h3>
-            <p>JUnit and Mockito for service behavior, with Postman for API checks.</p>
-            <ul class="tags"><li>JUnit</li><li>Mockito</li><li>Postman</li></ul>
-          </article>
-          <article class="cap reveal">
-            <span class="cap-no">08</span>
-            <h3>System Design</h3>
-            <p>Studying architecture, caching, and failure handling by building them.</p>
-            <ul class="tags"><li>Caching</li><li>APIs</li><li>Distributed ideas</li></ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="work" id="work">
-      <p class="kicker reveal">Work</p>
-      <h2 class="section-title reveal">Selected systems.</h2>
-      <p class="section-note reveal">Published projects. Descriptions stay with what each repository actually does.</p>
-
-      <article class="project reveal">
-        <div>
-          <div class="project-top"><span>01</span><span>Healthcare platform</span></div>
-          <h3>MedIntel</h3>
-          <p>A multimodal healthcare intelligence platform that connects clinical data, imaging, medication records, and governed AI workflows for human review. It is not an autonomous diagnostic system.</p>
-          <div class="project-links">
-            <a class="arrow-link" href="https://github.com/SunilMaurya-18/MedIntel" target="_blank" rel="noopener noreferrer">GitHub
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-            </a>
-          </div>
-          <ul class="tags"><li>Spring Boot</li><li>React</li><li>PostgreSQL</li><li>FastAPI</li></ul>
-        </div>
-        <div class="study" aria-hidden="true">
-          <div class="study-inner">
-            <div class="study-top"><span>Index</span><span>01</span></div>
-            <ul class="rows">
-              <li>Imaging <small>Record</small></li>
-              <li>Laboratory <small>Record</small></li>
-              <li>Medication <small>Record</small></li>
-              <li>Knowledge <small>Record</small></li>
-              <li>Review <small>Human</small></li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div>
-          <div class="project-top"><span>02</span><span>SEO platform</span></div>
-          <h3>SEOPulse</h3>
-          <p>A full-stack website SEO audit platform. Connect a site, run a crawl, review ranked issues, and download a report.</p>
-          <div class="project-links">
-            <a class="arrow-link" href="https://github.com/SunilMaurya-18/SEOPULSE" target="_blank" rel="noopener noreferrer">GitHub
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-            </a>
-          </div>
-          <ul class="tags"><li>Spring Boot</li><li>React</li><li>PostgreSQL</li><li>Redis</li><li>JWT</li></ul>
-        </div>
-        <div class="study" aria-hidden="true">
-          <div class="study-inner">
-            <div class="study-top"><span>Audit</span><span>02</span></div>
-            <ul class="bars">
-              <li><span>Crawl</span><i style="width:92%"></i></li>
-              <li><span>Pages</span><i style="width:74%"></i></li>
-              <li><span>Issues</span><i style="width:61%"></i></li>
-              <li><span>Report</span><i style="width:84%"></i></li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div>
-          <div class="project-top"><span>03</span><span>Task product</span></div>
-          <h3>DevTasks</h3>
-          <p>A task manager with registration, JWT auth, role-based access, search, filters, and pagination. Packaged with Docker and Nginx.</p>
-          <div class="project-links">
-            <a class="arrow-link" href="https://github.com/SunilMaurya-18/DevTasks" target="_blank" rel="noopener noreferrer">GitHub
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-            </a>
-          </div>
-          <ul class="tags"><li>Spring Boot</li><li>React</li><li>MongoDB</li><li>JWT</li><li>Docker</li></ul>
-        </div>
-        <div class="study" aria-hidden="true">
-          <div class="study-inner">
-            <div class="study-top"><span>Tasks</span><span>03</span></div>
-            <ul class="checks">
-              <li><span><i class="box on"></i>Auth and refresh tokens</span></li>
-              <li><span><i class="box on"></i>Create, assign, update</span></li>
-              <li><span><i class="box"></i>Filter by status</span></li>
-              <li><span><i class="box"></i>Paginated listing</span></li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div>
-          <div class="project-top"><span>04</span><span>Redis laboratory</span></div>
-          <h3>RedisLab</h3>
-          <p>A Redis internals lab: data structures, streams, locks, rate limits, persistence, and cluster topologies, exercised through Spring Boot.</p>
-          <div class="project-links">
-            <a class="arrow-link" href="https://github.com/SunilMaurya-18/redis-lab" target="_blank" rel="noopener noreferrer">GitHub
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-            </a>
-          </div>
-          <ul class="tags"><li>Java</li><li>Spring Data Redis</li><li>Docker</li><li>Redis</li></ul>
-        </div>
-        <div class="study" aria-hidden="true">
-          <div class="study-inner">
-            <div class="study-top"><span>Console</span><span>04</span></div>
-            <p class="mono"><b>SET</b> lock:1 OK<br><b>XADD</b> stream *<br><b>TTL</b> session 120<br><b>PING</b> PONG</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div>
-          <div class="project-top"><span>05</span><span>Smart farming</span></div>
-          <h3>PrithviCore</h3>
-          <p>An AI-assisted farm monitoring platform with soil analytics, plant image review, weather context, and a live web app.</p>
-          <div class="project-links">
-            <a class="arrow-link" href="https://github.com/SunilMaurya-18/PrithviCore" target="_blank" rel="noopener noreferrer">GitHub
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-            </a>
-            <a class="arrow-link" href="https://prithvicore.vercel.app/" target="_blank" rel="noopener noreferrer">Live
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-            </a>
-          </div>
-          <ul class="tags"><li>Next.js</li><li>Express</li><li>MongoDB</li><li>OpenAI</li></ul>
-        </div>
-        <div class="study" aria-hidden="true">
-          <div class="study-inner">
-            <div class="study-top"><span>Field</span><span>05</span></div>
-            <div class="nodes">
-              <div><small>Soil</small>Analytics</div>
-              <div><small>Leaf</small>Image review</div>
-              <div><small>Weather</small>Context</div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <div class="earlier">
-        <h3 class="reveal">Earlier studies</h3>
-        <p class="quiet reveal">Smaller projects that came before the systems above.</p>
-        <ul class="index-list">
-          <li class="reveal">
-            <a href="https://github.com/SunilMaurya-18/resend-mail-server" target="_blank" rel="noopener noreferrer">Resend Mail Server</a>
-            <p>A minimal Spring Boot service that sends email through Resend.</p>
-            <span>Java</span>
-          </li>
-          <li class="reveal">
-            <a href="https://github.com/SunilMaurya-18/SchoolManagement.java" target="_blank" rel="noopener noreferrer">School Management</a>
-            <p>A Java OOP console project for teachers, students, and grades.</p>
-            <span>Java</span>
-          </li>
-          <li class="reveal">
-            <a href="https://github.com/SunilMaurya-18/vidyavault-library-system" target="_blank" rel="noopener noreferrer">VidyaVault</a>
-            <p>A library interface built with HTML, CSS, and JavaScript.</p>
-            <span>Web</span>
-          </li>
-          <li class="reveal">
-            <a href="https://github.com/SunilMaurya-18/library-management-system" target="_blank" rel="noopener noreferrer">Library Management</a>
-            <p>A C console program for adding, issuing, and returning books.</p>
-            <span>C</span>
-          </li>
-          <li class="reveal">
-            <span class="name">PGRKAM AI Career Assistant</span>
-            <p>An AI-powered career assistant for career exploration and job-search activities.</p>
-            <span>AI</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="experience" id="experience">
-      <p class="kicker reveal">Experience</p>
-      <h2 class="section-title reveal">Systems built in practice.</h2>
-      <p class="section-note reveal">Independent projects, published while learning how production systems are put together.</p>
-
-      <article class="exp reveal">
-        <span class="exp-no">01</span>
-        <h3 class="exp-name"><span class="exp-role">Healthcare platform · Independent</span>MedIntel</h3>
-        <p>Mapped clinical data, imaging, medication, and knowledge into one Spring Boot platform with provenance and human review.</p>
-        <span class="exp-when">2026</span>
-      </article>
-      <article class="exp reveal">
-        <span class="exp-no">02</span>
-        <h3 class="exp-name"><span class="exp-role">Full-stack build · Independent</span>SEOPulse</h3>
-        <p>Designed crawl, audit, and report flows across a React client and a secured Spring Boot API.</p>
-        <span class="exp-when">2026</span>
-      </article>
-      <article class="exp reveal">
-        <span class="exp-no">03</span>
-        <h3 class="exp-name"><span class="exp-role">Product build · Independent</span>DevTasks</h3>
-        <p>Implemented authentication, authorization, task workflows, search, and pagination in a containerized stack.</p>
-        <span class="exp-when">2026</span>
-      </article>
-      <article class="exp reveal">
-        <span class="exp-no">04</span>
-        <h3 class="exp-name"><span class="exp-role">Systems study · Independent</span>RedisLab</h3>
-        <p>Made Redis behavior observable: structures, streams, locks, rate limits, persistence, and cluster setups.</p>
-        <span class="exp-when">2026</span>
-      </article>
-      <article class="exp reveal">
-        <span class="exp-no">05</span>
-        <h3 class="exp-name"><span class="exp-role">Product build · Independent</span>PrithviCore</h3>
-        <p>Shipped a farm-monitoring product with a live web app, sensor-oriented data, and image-based plant review.</p>
-        <span class="exp-when">2026</span>
-      </article>
-    </section>
-
-    <section class="contact" id="contact">
-      <p class="kicker reveal">Contact</p>
-      <h2 class="poster">
-        <span class="mask"><span style="--d:0ms">Let's build</span></span>
-        <span class="mask"><span style="--d:90ms">something</span></span>
-        <span class="mask"><span style="--d:180ms">useful.</span></span>
-      </h2>
-      <p class="contact-note reveal">Available for backend roles and collaborations.</p>
-      <div class="cards">
-        <a class="card reveal" href="https://github.com/SunilMaurya-18" target="_blank" rel="noopener noreferrer">
-          <span><small>GitHub</small><strong>SunilMaurya-18</strong></span>
-          <span class="card-foot"><span>Repository</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-          </span>
-        </a>
-        <a class="card reveal" href="https://www.linkedin.com/in/sunil-maurya77" target="_blank" rel="noopener noreferrer">
-          <span><small>LinkedIn</small><strong>Sunil Maurya</strong></span>
-          <span class="card-foot"><span>Profile</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-          </span>
-        </a>
-        <a class="card reveal" href="mailto:sunilmaurya7786@gmail.com">
-          <span><small>Email</small><strong>sunilmaurya7786@gmail.com</strong></span>
-          <span class="card-foot"><span>Write</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-          </span>
-        </a>
-        <a class="card reveal" href="https://leetcode.com/u/SunilMaurya77/" target="_blank" rel="noopener noreferrer">
-          <span><small>LeetCode</small><strong>SunilMaurya77</strong></span>
-          <span class="card-foot"><span>Profile</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M8 7h9v9"/></svg>
-          </span>
-        </a>
-      </div>
-      <p class="contact-meta"><a href="tel:+919305355760">+91 9305355760</a> · Azamgarh, Uttar Pradesh, India</p>
+      <a href="mailto:sunilmaurya7786@gmail.com" class="contact-email copy-email" data-email="sunilmaurya7786@gmail.com" data-magnetic aria-label="Copy sunilmaurya7786@gmail.com to clipboard">
+        <span class="copy-email-inner">
+          <span class="copy-email-default">sunilmaurya7786@gmail.com</span>
+          <span class="copy-email-done" aria-hidden="true">Copied ✓</span>
+        </span>
+        <span class="sr" role="status"></span>
+      </a>
+      <ul class="contact-links">
+        <li><a href="https://github.com/SunilMaurya-18" target="_blank" rel="noopener noreferrer"><small>GitHub</small>SunilMaurya-18 ↗</a></li>
+        <li><a href="https://www.linkedin.com/in/sunil-maurya77" target="_blank" rel="noopener noreferrer"><small>LinkedIn</small>sunil-maurya77 ↗</a></li>
+        <li><a href="https://leetcode.com/u/SunilMaurya77/" target="_blank" rel="noopener noreferrer"><small>LeetCode</small>SunilMaurya77 ↗</a></li>
+        <li><a href="tel:+919305355760"><small>Phone</small>+91 93053 55760</a></li>
+      </ul>
     </section>
   </main>
 
   <footer class="footer">
-    <div>
-      <strong>Sunil Maurya</strong>
-      <p>Java Developer / Software Engineer</p>
+    <p class="display footer-name">Sunil Maurya</p>
+    <div class="footer-meta">
+      <span>Java backend developer · Software engineer</span>
+      <span>Azamgarh, Uttar Pradesh, India</span>
+      <span>© 2026</span>
     </div>
-    <nav aria-label="Footer">
-      <a href="https://github.com/SunilMaurya-18" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://www.linkedin.com/in/sunil-maurya77" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://leetcode.com/u/SunilMaurya77/" target="_blank" rel="noopener noreferrer">LeetCode</a>
-      <a href="mailto:sunilmaurya7786@gmail.com">Email</a>
-    </nav>
-    <p class="legal">© 2026 Sunil Maurya</p>
   </footer>
-
-  <button class="fab" id="fab" type="button" aria-expanded="false" aria-controls="quickPanel">
-    <span class="fab-label">Index</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-  </button>
-
-  <div class="quick" id="quick" aria-hidden="true" inert>
-    <div class="quick-backdrop"></div>
-    <div class="quick-panel" id="quickPanel" role="dialog" aria-modal="true" aria-labelledby="quickTitle">
-      <div class="quick-head">
-        <span id="quickTitle">Index</span>
-        <span>Quick access</span>
-      </div>
-      <div class="quick-grid">
-        <a class="q-link" href="#work">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
-          <span><small>01</small>Projects</span>
-          <i class="q-go" aria-hidden="true">↗</i>
-        </a>
-        <a class="q-link" href="#experience">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg>
-          <span><small>02</small>Experience</span>
-          <i class="q-go" aria-hidden="true">↗</i>
-        </a>
-        <a class="q-link" href="#skills">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h7v7H4zM13 6h7v4h-7zM13 12h7v6h-7zM4 15h7v3H4z"/></svg>
-          <span><small>03</small>Skills</span>
-          <i class="q-go" aria-hidden="true">↗</i>
-        </a>
-        <a class="q-link" href="#about">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 19c1.4-3 3.8-4.5 7-4.5S17.6 16 19 19"/></svg>
-          <span><small>04</small>About</span>
-          <i class="q-go" aria-hidden="true">↗</i>
-        </a>
-        <a class="q-link" href="#contact">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
-          <span><small>05</small>Contact</span>
-          <i class="q-go" aria-hidden="true">↗</i>
-        </a>
-        <a class="q-link" href="https://github.com/SunilMaurya-18" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 19c-4 1.5-4-2.5-6-3m12 5v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.1-1.5 6.1-6.6a4.7 4.7 0 0 0-1.3-3.2 4.4 4.4 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.4 4.4 0 0 0-.1 3.2A4.7 4.7 0 0 0 4 9.5c0 5.1 3.1 6.3 6.1 6.6a3.4 3.4 0 0 0-.9 2.6V21"/></svg>
-          <span><small>06</small>GitHub</span>
-          <i class="q-go" aria-hidden="true">↗</i>
-        </a>
-      </div>
-    </div>
-  </div>
 
   <noscript>
     <style>
-      .intro { display: none !important; }
-      .mask > span, .hero-meta, .hero-side, .hero-foot, .reveal { opacity: 1 !important; transform: none !important; }
+      .loader, .cursor { display: none !important; }
+      .clip .block, [data-rise], [data-reveal] { opacity: 1 !important; transform: none !important; clip-path: none !important; }
     </style>
   </noscript>
-  <script type="module" src="js/structure-flow.js"></script>
-  <script src="js/logos.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
