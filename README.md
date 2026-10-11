@@ -199,7 +199,7 @@ To play a licensed music track instead of the generated score, add the file as `
 
 ### Deploy
 
-It is a static site. On Vercel, use the "Other" framework preset with no build command and the project root as the output directory.
+It is a static site. `vercel.json` tells Vercel to skip install and build and serve the project root, so every push to `main` deploys as is.
 
 ---
 
